@@ -7,16 +7,7 @@ if (!DISCORD_TOKEN || !DISCORD_APP_ID) {
   process.exit(1);
 }
 
-const commands = [
-  {
-    name: "acces",
-    description: "Entrer le mot de passe du salon privé",
-    contexts: [0], // serveurs uniquement
-    options: [
-      { type: 3, name: "mot_de_passe", description: "Le mot de passe du salon", required: true },
-    ],
-  },
-];
+import { COMMANDS as commands } from "./src/commands.js";
 
 const res = await fetch(`https://discord.com/api/v10/applications/${DISCORD_APP_ID}/commands`, {
   method: "PUT",

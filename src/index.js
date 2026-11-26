@@ -6,6 +6,8 @@
  * Secrets requis : DISCORD_PUBLIC_KEY, DISCORD_TOKEN, SALON_ID, SALON_MDP
  */
 
+import { COMMANDS } from "./commands.js";
+
 const VIEW_CHANNEL = 1n << 10n;
 const SEND_MESSAGES = 1n << 11n;
 const READ_MESSAGE_HISTORY = 1n << 16n;
@@ -16,6 +18,8 @@ const EPHEMERAL = 1 << 6;
 export default {
   async fetch(request, env) {
     if (request.method !== "POST") {
+      const { pathname } = new URL(request.url);
+      if (pathname === "/register") return registerCommands(env);
       return new Response("Bot Maître des Clés en ligne ✅");
     }
 
@@ -70,7 +74,30 @@ async function handleAcces(interaction, env) {
   return reply(`✅ Accès accordé à <#${env.SALON_ID}>`);
 }
 
+// Enregistre (ou met à jour) la commande /acces auprès de Discord.
+// Sans risque : renvoie toujours la même liste de commandes.
+async function registerCommands(env) {
+  const headers = { Authorization: `Bot ${env.DISCORD_TOKEN}`, "Content-Type": "application/json" };
+  const app = await fetch("https://discord.com/api/v10/applications/@me", { headers });
+  if (!app.ok) {
+    return text(`❌ Token refusé par Discord (${app.status}). Vérifie le secret DISCORD_TOKEN.`, 500);
+  }
+  const { id } = await app.json();
+  const res = await fetch(`https://discord.com/api/v10/applications/${id}/commands`, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(COMMANDS),
+  });
+  return res.ok
+    ? text("✅ Commande /acces enregistrée sur Discord.")
+    : text(`❌ Erreur Discord ${res.status} : ${await res.text()}`, 500);
+}
+
 // --- Utilitaires ---
+
+function text(body, status = 200) {
+  return new Response(body, { status, headers: { "Content-Type": "text/plain; charset=utf-8" } });
+}
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {

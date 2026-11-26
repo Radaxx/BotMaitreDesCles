@@ -31,7 +31,8 @@ Hébergé gratuitement sur **Cloudflare Workers** (pas de serveur à garder allu
 
 1. Developer Portal → *General Information* → **Interactions Endpoint URL** : colle l'URL du Worker
    et enregistre (Discord vérifie l'URL tout de suite ; les secrets doivent déjà être en place).
-2. Enregistre la commande `/acces` (une seule fois, Node 18+ requis) :
+2. Enregistre la commande `/acces` : ouvre `https://<url-du-worker>/register` dans ton navigateur.
+   (Alternative en local, Node 18+ :)
 
 ```bash
 DISCORD_TOKEN=ton_token DISCORD_APP_ID=ton_application_id node register.js
