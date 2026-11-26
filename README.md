@@ -25,7 +25,7 @@ Hébergé gratuitement sur **Cloudflare Workers** (pas de serveur à garder allu
 | `SALON_ID` | ID du salon protégé |
 | `SALON_MDP` | Le mot de passe |
 
-3. Copie l'URL du Worker (`https://bot-maitre-des-cles.<ton-compte>.workers.dev`).
+3. Copie l'URL du Worker (`https://botmaitredescles.<ton-compte>.workers.dev`).
 
 ## 3. Discord — brancher le Worker
 
