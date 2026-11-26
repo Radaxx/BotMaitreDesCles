@@ -1,3 +1,9 @@
 name = "botmaitredescles"
 main = "src/index.js"
 compatibility_date = "2026-11-01"
+keep_vars = true
+
+# Valeurs non sensibles. Le token et le mot de passe restent des *Secrets* dans Cloudflare.
+[vars]
+DISCORD_PUBLIC_KEY = "8f7a952bc153bdd8a738d5e68e90208836a049f591de2c4bc809cc91313b6e99"
+SALON_ID = "1575497042535387146"
