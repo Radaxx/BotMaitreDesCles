@@ -1,0 +1,13 @@
+{
+  "name": "bot-maitre-des-cles",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "register": "node register.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
