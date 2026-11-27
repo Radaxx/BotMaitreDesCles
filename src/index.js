@@ -11,7 +11,14 @@ import { COMMANDS } from "./commands.js";
 const VIEW_CHANNEL = 1n << 10n;
 const SEND_MESSAGES = 1n << 11n;
 const READ_MESSAGE_HISTORY = 1n << 16n;
-const PERMISSIONS = (VIEW_CHANNEL | SEND_MESSAGES | READ_MESSAGE_HISTORY).toString();
+// Salon vocal
+const STREAM = 1n << 9n;        // Vidéo / partage d'écran
+const CONNECT = 1n << 20n;      // Se connecter
+const SPEAK = 1n << 21n;        // Parler
+const USE_VAD = 1n << 25n;      // Détection de la voix
+const PERMISSIONS = (
+  VIEW_CHANNEL | SEND_MESSAGES | READ_MESSAGE_HISTORY | STREAM | CONNECT | SPEAK | USE_VAD
+).toString();
 
 const EPHEMERAL = 1 << 6;
 
